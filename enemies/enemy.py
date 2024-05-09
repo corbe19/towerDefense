@@ -9,7 +9,9 @@ class Enemy:
         self.width = width
         self.height = height
         self.health = 10
-        self.path = []
+        self.path = [(15, 436), (191, 435), (197, 205), (436, 205), (444, 509), (753, 514), (756, 363), (1178, 356), (1190, 357)]
+        self.path_pos = 0
+        self.vel = 3
 
     def draw(self, win):
         # draw enemy
