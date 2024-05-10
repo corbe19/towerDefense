@@ -4,24 +4,27 @@ import math
 class Enemy:
     img = []
 
-    def __init__(self, x, y, width, height):
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
+    def __init__(self):
+        self.width = 64
+        self.height = 64
         self.health = 10
+        self.img = None
         self.path = [(15, 436), (191, 435), (197, 205), (436, 205), (444, 509), (753, 514), (756, 363), (1178, 356), (1190, 357)]
+        self.x = self.path[0][0]
+        self.y = self.path[0][1]
         self.path_pos = 0
-        self.vel = 3
+        self.vel = .25
         self.move_count = 0
+        self.move_dis = 0
+        self.dis = 0
 
     def draw(self, win):
         # draw enemy
-        pass
+        win.blit(self.img, (self.x, self.y))
+        self.move()
 
 
     def move(self):
-        # move enemy
         x1, y1 = self.path[self.path_pos]
         if self.path_pos + 1 >= len(self.path):
             x2, y2 = (1190, 357)
@@ -41,13 +44,11 @@ class Enemy:
             self.dis = 0
             self.move_count = 0
             self.path_pos += 1
-            if self.path_pos >= len(self.path):
-                self.path_pos = 0
-                self.x, self.y = self.path[0]
-                return
 
         self.x = move_x
         self.y = move_y
+
+
 
 
     def collide(self, x, y):
@@ -55,7 +56,7 @@ class Enemy:
         if x < self.x + self.width and x > self.x:
             if y > self.y and y < self.y + self.height:
                 return True
-        pass
+        return False
 
     def hit(self):
         # enemy hit
