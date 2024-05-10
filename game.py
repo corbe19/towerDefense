@@ -1,5 +1,6 @@
 import pygame
 import os
+from enemies.basic_enemy import Basic_enemy
 
 class Game:
     def __init__(self):
@@ -7,7 +8,7 @@ class Game:
         self.width = 1200
         self.height = 800
         self.win = pygame.display.set_mode((self.width, self.height))
-        self.enemies = []
+        self.enemies = [Basic_enemy()]
         self.money = 100
         self.lives = 100
         self.towers = []
@@ -34,8 +35,8 @@ class Game:
         pygame.quit()
 
     def draw(self):
-        self.win.blit(self.bg, (0, 0))
-        pygame.display.update()
+        for enemies in self.enemies:
+            enemies.draw(self.win)
 
 g = Game()
 g.run()
