@@ -27,30 +27,33 @@ class Enemy:
     def move(self):
         x1, y1 = self.path[self.path_pos]
         if self.path_pos + 1 >= len(self.path):
-            x2, y2 = (1190, 357)
+            x2, y2 = (-10, 355)
         else:
-            x2, y2 = self.path[self.path_pos + 1]
+            x2, y2 = self.path[self.path_pos+1]
 
-        move_dis = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+        dirn = ((x2-x1)*2, (y2-y1)*2)
+        length = math.sqrt((dirn[0])**2 + (dirn[1])**2)
+        dirn = (dirn[0]/length, dirn[1]/length)
 
-        self.move_count += 1
-        dirvect = (x2 - x1, y2 - y1)
-
-        move_x, move_y = (self.x + dirvect[0] * self.move_count, self.y + dirvect[1] * self.move_count)
-        self.dis += math.sqrt((move_x - x1)**2 + (move_y - y1)**2)
-
-        #next path point
-        if self.dis >= move_dis:
-            self.dis = 0
-            self.move_count = 0
-            self.path_pos += 1
-            if self.path_pos >= len(self.path) - 1:
-                self.path_pos = 0
+        move_x, move_y = ((self.x + dirn[0]), (self.y + dirn[1]))
 
         self.x = move_x
         self.y = move_y
 
+                # Go to next point
+        if dirn[0] >= 0: # moving right
+            if self.x >= x2:
+                self.path_pos += 1
+        else: # moving left
+            if self.x <= x2:
+                self.path_pos += 1
 
+        if dirn[1] >= 0: # moving down
+            if self.y >= y2:
+                self.path_pos += 1
+        else: # moving up
+            if self.y <= y2:
+                self.path_pos += 1
 
 
     def collide(self, x, y):
