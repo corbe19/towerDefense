@@ -44,6 +44,8 @@ class Enemy:
             self.dis = 0
             self.move_count = 0
             self.path_pos += 1
+            if self.path_pos >= len(self.path) - 1:
+                self.path_pos = 0
 
         self.x = move_x
         self.y = move_y
