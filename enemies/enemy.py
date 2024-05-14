@@ -9,7 +9,7 @@ class Enemy:
         self.height = 64
         self.health = 10
         self.img = None
-        self.path = [(15, 436), (191, 435), (197, 205), (436, 205), (444, 509), (753, 514), (756, 363), (1178, 356), (1190, 357), (1400, 357)]
+        self.path = [(-70, 436), (15, 436), (191, 435), (197, 205), (436, 205), (444, 509), (753, 514), (756, 363), (1178, 356), (1190, 357), (1400, 357), (1470, 357)]
         self.x = self.path[0][0]
         self.y = self.path[0][1]
         self.path_pos = 0
@@ -37,7 +37,7 @@ class Enemy:
 
         move_x, move_y = ((self.x + dirn[0]), (self.y + dirn[1]))
 
-        self.x = move_x
+        self.x = move_x 
         self.y = move_y
 
                 # Go to next point
@@ -54,6 +54,7 @@ class Enemy:
         else: # moving up
             if self.y <= y2:
                 self.path_pos += 1
+
 
 
     def collide(self, x, y):
