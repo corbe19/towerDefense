@@ -46,8 +46,8 @@ class Enemy:
 
     def collide(self, x, y):
         # check if enemy is hit/range of tower
-        if self.x - self.width / 2 < x < self.x + self.width / 2:
-            if self.y - self.height / 2 < y < self.y + self.height / 2:
+        if x <= self.x + self.width and x >= self.x:
+            if y <= self.y + self.height and y >= self.y:
                 return True
         return False
 
