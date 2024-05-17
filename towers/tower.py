@@ -1,15 +1,17 @@
 import pygame
 
+
+
 #ABSTARCT CLASS
 class Tower:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.width = width
-        self.height = height
-        self.sell_price[0,0,0]
+        self.width = 0
+        self.height = 0
+        self.sell_price = [0,0,0]
         self.price = [0,0,0]
-        self.lvl = 1
+        self.lvl = 0
         self.selected = False
         self.menu = None
         self.tower_imgs = []

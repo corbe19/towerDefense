@@ -3,6 +3,7 @@ import os
 from enemies.basic_enemy import Basic_enemy
 from enemies.fast_enemy import Fast_enemy
 from enemies.strong_enemy import Strong_enemy
+from towers.longRangeTower import LongRangeTower
 
 class Game:
     def __init__(self):
@@ -13,7 +14,7 @@ class Game:
         self.enemies = [Basic_enemy(), Fast_enemy(), Strong_enemy()]
         self.money = 100
         self.lives = 100
-        self.towers = []
+        self.towers = [LongRangeTower(300, 300)]
         self.bg = pygame.image.load(os.path.join("game_assets", "Background1.png"))
         self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
        
@@ -48,8 +49,14 @@ class Game:
 
     def draw(self):
         self.win.blit(self.bg, (0, 0))
+
         for enemies in self.enemies:
             enemies.draw(self.win)
+
+        for tower in self.towers:
+            tower.draw(self.win)
+
+
         pygame.display.update()
 
 g = Game()
