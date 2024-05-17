@@ -42,6 +42,9 @@ class Game:
             
             for d in del_enemy:
                 self.enemies.remove(d)
+
+            for tower in self.towers:
+                tower.attack(self.enemies)
             
             self.draw()
         
