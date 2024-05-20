@@ -7,7 +7,7 @@ class Enemy:
     def __init__(self):
         self.width = 64
         self.height = 64
-        self.health = 10
+        self.health = 1
         self.img = None
         self.path = [(-70, 436), (15, 436), (191, 435), (191, 205), (436, 205), (444, 509), (753, 514), (756, 363), (1178, 356), (1190, 357), (1400, 357), (1470, 357)]
         self.x = self.path[0][0]
@@ -17,11 +17,13 @@ class Enemy:
         self.move_count = 0
         self.move_dis = 0
         self.dis = 0
+        self.max_health = 1
 
     def draw(self, win):
         # draw enemy
         if self.img:
             win.blit(self.img, (self.x - self.img.get_width() / 2, self.y - self.img.get_height() / 2))
+        self.draw_health_bar(win)
         self.move()
 
     def move(self):
@@ -44,6 +46,14 @@ class Enemy:
                     self.path_pos += 1
                     self.x, self.y = self.path[self.path_pos]  # Correct position to the exact path point
 
+    def draw_health_bar(self, win):
+        length = 50
+        move_By = round(length / self.max_health)
+        health_bar = move_By * self.health
+
+        pygame.draw.rect(win, (255,0,0), (self.x - 25, self.y - 40, length, 10), 0)
+        pygame.draw.rect(win, (0,255,0), (self.x - 25, self.y - 40, health_bar, 10), 0)
+
     def collide(self, x, y):
         # check if enemy is hit/range of tower
         if x <= self.x + self.width and x >= self.x:
@@ -53,4 +63,8 @@ class Enemy:
 
     def hit(self):
         # enemy hit
-        pass
+
+        self.health -= 1
+        if self.health <= 0:
+            return True
+        return False
