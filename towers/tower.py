@@ -1,7 +1,5 @@
 import pygame
 
-
-
 #ABSTARCT CLASS
 class Tower:
     def __init__(self, x, y):
@@ -15,6 +13,7 @@ class Tower:
         self.selected = False
         self.menu = None
         self.tower_imgs = []
+        self.damage = 1
 
     def draw(self, win):
         img = self.tower_imgs[self.lvl]
@@ -35,11 +34,12 @@ class Tower:
     def upgrade(self):
         #upgrade tower
         self.lvl += 1
+        self.damage += 1
 
     def get_upgrade_cost(self):
         #return upgrade cost
         return self.price[self.lvl - 1]
 
-    def move(self):
+    def move(self, x, y):
         self.x = x
         self.y = y
