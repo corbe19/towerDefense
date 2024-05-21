@@ -4,6 +4,8 @@ from enemies.basic_enemy import Basic_enemy
 from enemies.fast_enemy import Fast_enemy
 from enemies.strong_enemy import Strong_enemy
 from towers.longRangeTower import LongRangeTower
+import time
+import random
 
 class Game:
     def __init__(self):
@@ -11,18 +13,22 @@ class Game:
         self.width = 1200
         self.height = 800
         self.win = pygame.display.set_mode((self.width, self.height))
-        self.enemies = [Basic_enemy(), Fast_enemy(), Strong_enemy()]
+        self.enemies = []
         self.money = 100
         self.lives = 100
-        self.towers = [LongRangeTower(300, 300)]
+        self.towers = [LongRangeTower(300, 300), LongRangeTower(500, 300), LongRangeTower(700, 300)]
         self.bg = pygame.image.load(os.path.join("game_assets", "Background1.png"))
         self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
+        self.timer = time.time()
        
 
     def run(self):
         run = True
         clock = pygame.time.Clock()
         while run:
+            if time.time() - self.timer >= random.randrange(2, 4):
+                self.timer = time.time()
+                self.enemies.append(random.choice([Basic_enemy(), Fast_enemy(), Strong_enemy()]))
             clock.tick(60)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
