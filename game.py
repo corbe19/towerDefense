@@ -3,8 +3,8 @@ import os
 from enemies.basic_enemy import Basic_enemy
 from enemies.fast_enemy import Fast_enemy
 from enemies.strong_enemy import Strong_enemy
-from towers.longRangeTower import LongRangeTower
-from towers.longRangeTower import ShortRangeTower
+from towers.longRangeTower import LongRangeTower, ShortRangeTower
+
 import time
 import random
 
@@ -17,7 +17,7 @@ class Game:
         self.enemies = []
         self.money = 100
         self.lives = 100
-        self.towers = [ShortRangeTower(300, 300), ShortRangeTower(500, 300), LongRangeTower(700, 300)]
+        self.towers = [ShortRangeTower(300, 300), ShortRangeTower(500, 300), ShortRangeTower(700, 300)]
         self.bg = pygame.image.load(os.path.join("game_assets", "Background1.png"))
         self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
         self.timer = time.time()

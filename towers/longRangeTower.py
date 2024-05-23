@@ -27,6 +27,7 @@ class LongRangeTower(Tower):
         self.angle = 0
         self.timer = time.time()
         self.damage = 1 
+        self.fire_rate = .75
 
         for i in range(8):
             self.gun_imgs.append(pygame.transform.scale(pygame.image.load(os.path.join("game_assets", "Towers", "LR_lvl1", f"frame_{i}_delay-0.1s.gif")), (128, 128)))
@@ -73,7 +74,7 @@ class LongRangeTower(Tower):
         enemy_closest.sort(key=lambda x: x.path_pos, reverse=True)
         if len(enemy_closest) > 0:
             first_enemy = enemy_closest[0]
-            if time.time() - self.timer >= .75:
+            if time.time() - self.timer >= self.fire_rate:
                 self.timer = time.time()
                 if first_enemy.hit() == True:
                     enemies.remove(first_enemy)
@@ -109,11 +110,4 @@ class ShortRangeTower(LongRangeTower):
         self.angle = 0
         self.timer = time.time()
         self.damage = 1 
-
-        for i in range(8):
-            self.gun_imgs.append(pygame.transform.scale(pygame.image.load(os.path.join("game_assets", "Towers", "SR_lvl1", f"frame_{i}_delay-0.1s.gif")), (128, 128)))
-
-        self.tower_imgs.append(pygame.transform.scale(pygame.image.load(os.path.join("game_assets", "Towers", "Base", "ShortRangeTowerBase.png")), (96, 96)))
-
-        self.rotated_gun_imgs = self.gun_imgs[:]
         
