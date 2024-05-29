@@ -11,7 +11,7 @@ tower_imgsG = []
 for i in range(8):
     gun_imgsG.append(pygame.transform.scale(pygame.image.load(os.path.join("game_assets", "Towers", "G_lvl1", f"frame_{i}_delay-0.1s.gif")), (128, 128)))
 
-tower_imgsG.append(pygame.transform.scale(pygame.image.load(os.path.join("game_assets", "Towers", "Base", "GlueTowerBase.png")), (96, 96)))
+tower_imgsG.append(pygame.transform.scale(pygame.image.load(os.path.join("game_assets", "Towers", "Base", "GlueTowerBase.png")), (90, 90)))
 
 rotated_gun_imgs = gun_imgsG[:]
 
