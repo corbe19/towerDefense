@@ -4,9 +4,11 @@ from enemies.basic_enemy import Basic_enemy
 from enemies.fast_enemy import Fast_enemy
 from enemies.strong_enemy import Strong_enemy
 from towers.longRangeTower import LongRangeTower, ShortRangeTower
-
+pygame.font.init()
 import time
 import random
+
+lives_img = pygame.transform.scale(pygame.image.load(os.path.join("game_assets", "heart.png")), (32, 32))
 
 class Game:
     def __init__(self):
@@ -16,11 +18,12 @@ class Game:
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = []
         self.money = 100
-        self.lives = 100
-        self.towers = [ShortRangeTower(300, 300), ShortRangeTower(500, 300), ShortRangeTower(700, 300)]
+        self.lives = 10
+        self.towers = [LongRangeTower(300, 300)]
         self.bg = pygame.image.load(os.path.join("game_assets", "Background1.png"))
         self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
         self.timer = time.time()
+        self.lives_font = pygame.font.SysFont("comicsans", 25)
        
 
     def run(self):
@@ -52,6 +55,9 @@ class Game:
 
             for tower in self.towers:
                 tower.attack(self.enemies)
+
+            if self.lives <= 0:
+                run = False
             
             self.draw()
         
@@ -60,11 +66,20 @@ class Game:
     def draw(self):
         self.win.blit(self.bg, (0, 0))
 
+        for tower in self.towers:
+            tower.draw(self.win)
+
         for enemies in self.enemies:
             enemies.draw(self.win)
 
-        for tower in self.towers:
-            tower.draw(self.win)
+        #draw lives
+        text = self.lives_font.render(str(self.lives), 1, (255, 255, 255))
+        life = lives_img
+        startX = self.width - life.get_width() - 10
+
+        self.win.blit(text, (startX - text.get_width() - 1, 9))
+
+        self.win.blit(life, (startX, 10))
 
 
         pygame.display.update()

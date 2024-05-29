@@ -17,7 +17,7 @@ rotated_gun_imgs = gun_imgsSR[:]
 
 
 class ShortRangeTower(LongRangeTower):
-    def __intit__(self,x,y):
+    def __init__(self,x,y):
         super().__init__(x,y)
         self.tower_imgs = tower_imgsSR[:]
         self.gun_imgs = gun_imgsSR[:]
