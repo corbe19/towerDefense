@@ -4,6 +4,7 @@ from enemies.basic_enemy import Basic_enemy
 from enemies.fast_enemy import Fast_enemy
 from enemies.strong_enemy import Strong_enemy
 from towers.longRangeTower import LongRangeTower, ShortRangeTower
+from towers.glueTower import GlueTower
 pygame.font.init()
 import time
 import random
@@ -13,13 +14,13 @@ lives_img = pygame.transform.scale(pygame.image.load(os.path.join("game_assets",
 class Game:
     def __init__(self):
         self.running = True
-        self.width = 1200
+        self.width = 1250
         self.height = 800
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = []
         self.money = 100
         self.lives = 10
-        self.towers = [LongRangeTower(300, 300)]
+        self.towers = [LongRangeTower(300, 300), GlueTower(500, 300), ShortRangeTower(700, 300)]
         self.bg = pygame.image.load(os.path.join("game_assets", "Background1.png"))
         self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
         self.timer = time.time()
@@ -46,7 +47,7 @@ class Game:
 
             del_enemy = []       
             for enemy in self.enemies:
-                if enemy.x >= 1400:
+                if enemy.x >= 1300:
                     self.lives -= 1
                     del_enemy.append(enemy)
             
@@ -83,6 +84,9 @@ class Game:
 
 
         pygame.display.update()
+
+    def draw_menu(self):
+        pass
 
 g = Game()
 g.run()

@@ -68,3 +68,7 @@ class Enemy:
         if self.health <= 0:
             return True
         return False
+    
+    def slow(self):
+        if self.vel > 1:
+            self.vel *= .75

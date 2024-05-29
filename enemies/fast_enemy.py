@@ -2,7 +2,7 @@ import pygame
 import os
 from .enemy import Enemy
 
-img = (pygame.transform.scale(pygame.image.load(os.path.join("game_assets\Enemies", "enemy3.png")), (64, 64)))
+img = (pygame.transform.scale(pygame.image.load(os.path.join("game_assets\Enemies", "enemy3.png")), (92, 48)))
 
 class Fast_enemy(Enemy):
     def __init__(self):
