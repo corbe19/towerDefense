@@ -29,10 +29,8 @@ class LongRangeTower(Tower):
         self.rotated_gun_imgs = self.gun_imgs[:]
 
     def draw(self, win):
+        super().draw_range(win)
         super().draw(win)
-        surface = pygame.Surface((self.range * 2, self.range * 2), pygame.SRCALPHA, 32)
-        pygame.draw.circle(surface, (50, 50, 50, 128), (self.range, self.range), self.range, 0)
-        win.blit(surface, (self.x - self.range, self.y - self.range))
 
         if self.inRange:
             self.gun_count += 1

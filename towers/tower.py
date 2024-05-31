@@ -1,7 +1,5 @@
 import pygame
 
-
-
 #ABSTARCT CLASS
 class Tower:
     def __init__(self, x, y):
@@ -21,10 +19,18 @@ class Tower:
         img = self.tower_imgs[self.lvl]
         win.blit(img, (self.x-img.get_width()//2, self.y-img.get_height()//2))
 
+    def draw_range(self, win):
+        if self.selected:
+            surface = pygame.Surface((self.range * 2, self.range * 2), pygame.SRCALPHA, 32)
+            pygame.draw.circle(surface, (50, 50, 50, 128), (self.range, self.range), self.range, 0)
+            win.blit(surface, (self.x - self.range, self.y - self.range))
+
+
     def click(self, x, y):
         #returns bool for if tower is clicked
-        if x <= self.x + self.width and x >= self.x:
-            if y <= self.y + self.height and y >= self.y:
+        img = self.tower_imgs[self.lvl]
+        if x <= self.x - img.get_width()//2 + self.width and x >= self.x - img.get_width()//2:
+            if y <= self.y + self.height - img.get_height()//2 and y >= self.y - img.get_height()//2 :
                 return True
         return False
 

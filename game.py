@@ -25,7 +25,7 @@ class Game:
         self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
         self.timer = time.time()
         self.lives_font = pygame.font.SysFont("comicsans", 25)
-       
+        self.selected_tower = None
 
     def run(self):
         run = True
@@ -42,7 +42,13 @@ class Game:
                 pos = pygame.mouse.get_pos()
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    pass
+                    for tower in self.towers:
+                        if tower.click(pos[0], pos[1]):
+                            print("clicked")
+                            tower.selected = True
+                            self.selected_tower = tower
+                        else:
+                            tower.selected = False
 
 
             del_enemy = []       
