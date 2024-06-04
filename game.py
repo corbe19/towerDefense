@@ -44,11 +44,11 @@ class Game:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     for tower in self.towers:
                         if tower.click(pos[0], pos[1]):
-                            print("clicked")
                             tower.selected = True
                             self.selected_tower = tower
                         else:
                             tower.selected = False
+
 
 
             del_enemy = []       
@@ -75,6 +75,8 @@ class Game:
 
         for tower in self.towers:
             tower.draw(self.win)
+            if tower.selected:
+                tower.draw_range(self.win)
 
         for enemies in self.enemies:
             enemies.draw(self.win)

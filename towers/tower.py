@@ -22,17 +22,19 @@ class Tower:
     def draw_range(self, win):
         if self.selected:
             surface = pygame.Surface((self.range * 2, self.range * 2), pygame.SRCALPHA, 32)
-            pygame.draw.circle(surface, (50, 50, 50, 128), (self.range, self.range), self.range, 0)
+            pygame.draw.circle(surface, (50, 50, 50, 64), (self.range, self.range), self.range, 0)
             win.blit(surface, (self.x - self.range, self.y - self.range))
 
 
     def click(self, x, y):
-        #returns bool for if tower is clicked
+        # Returns bool for if tower is clicked
         img = self.tower_imgs[self.lvl]
-        if x <= self.x - img.get_width()//2 + self.width and x >= self.x - img.get_width()//2:
-            if y <= self.y + self.height - img.get_height()//2 and y >= self.y - img.get_height()//2 :
-                return True
+        width = img.get_width()
+        height = img.get_height()
+        if (self.x - width // 2) <= x <= (self.x + width // 2) and (self.y - height // 2) <= y <= (self.y + height // 2):
+            return True
         return False
+
 
     def sell(self):
         #sell tower, return sell price
